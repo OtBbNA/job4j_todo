@@ -1,0 +1,238 @@
+@font-face {
+    font-family: "Orbitron Medium";
+    src: url("../fonts/Orbitron-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Ysabeau Office";
+    src: url("../fonts/YsabeauOffice-SemiBold.ttf");
+}
+
+:root {
+    --font-family-header: 'Orbitron Medium', sans-serif;
+}
+
+/* Общие */
+
+* {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+    text-decoration: none;
+
+    font-size: x-large;
+}
+
+html {
+    height: 100vh;
+}
+
+.body {
+    display: block;
+    background-color: #37494d;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Ysabeau Office';
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin: auto;
+    background-color: #B7C8D0;
+    width: 80%;
+    top: 0;
+    left: 10%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+/* Хедер */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    background-color: #B7C8D0;
+    width: 100%;
+}
+
+.header__logo {
+    display: flex;
+}
+
+.header__logo__img {
+    width: 70px;
+}
+
+.header__logo__text {
+    font-family: var(--font-family-header);
+    padding-top: 3px;
+    padding-left: 10px;
+    font-size: 50px;
+}
+
+.header__registration {
+    display: flex;
+}
+
+.header__registration__block {
+    padding: 0px 10px 0px 10px;
+    display: flex;
+    margin-right: 25px;
+}
+
+.header__registration__block>p {
+    padding-top: 17px;
+}
+
+.header__registration__block:hover {
+    background-color: #fff;
+    border-radius: 35px;
+}
+
+.header__registration__img {
+    width: 50px;
+}
+
+.header__registration__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 6px 10px 0px 10px;
+    margin-right: 15px;
+}
+
+.header__registration__button:hover {
+    background-color: #fff;
+    border-radius: 35px;
+}
+
+/* Навигация */
+
+.nav {
+    width: 20%;
+    background-color: #B7C8D0;
+}
+
+.nav__menu {
+    margin-top: 10px;
+}
+
+.nav__menu__list {
+    margin-bottom: 20px;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.nav__menu__list>li {
+    margin-bottom: 5px;
+}
+
+.nav__menu__list>li>a {
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav__menu__list>li>a>img {
+    width: 35px;
+    padding: 0px 0px 0px 5px;
+}
+
+.nav__menu__list>li>a>p {
+    padding: 0px 0px 0px 5px;
+}
+
+.nav__menu__list>li:hover {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #fff;
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.nav__login {
+    margin: 8px 0px 9px 5px;
+    display: flex;
+    padding-bottom: 5px;
+}
+
+.nav__login>a {
+    display: flex;
+    padding: 5px 0px 0px 5px;
+}
+
+.nav__login>a>p {
+    display: block;
+    padding: 12px 0px 0px 5px;
+}
+
+
+
+.nav__login:hover {
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+
+
+
+
+
+
+.main__content {
+    flex: 1;
+    margin: 10px 10px 0px 0px;
+    border-radius: 15px;
+    background-color: #fff;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.main__content::-webkit-scrollbar {
+    width: 15px;
+    background: #fff;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.main__content::-webkit-scrollbar-thumb {
+    max-height: 40px;
+    background-color: gray;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.main__content__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.main__content__table>tbody>tr {
+    cursor: pointer;
+}
+
+.main__content__table>tbody>tr>td {
+    border-bottom: 1px solid gray;
+    font-size: 15px;
+}
+
+.main__content__table>tbody>tr:hover {
+    box-shadow: 0px 1px 5px 0px rgb(49, 49, 49);
+}
+
+.main__content__table>tbody>tr>td {
+    padding: 5px;
+}
