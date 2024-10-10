@@ -4,32 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/indexStyle.css}">
+    <link rel="stylesheet" th:href="@{css/pageStyle.css}">
+    <link rel="stylesheet" th:href="@{css/indexContentStyle.css}">
 
     <title>Список</title>
 </head>
 
 <body class="body">
     <div class="wrapper">
-        <header class="header">
-            <div class="header__logo">
-                <img class="header__logo__img" th:src="@{img/logo.svg}" alt="#">
-                <p class="header__logo__text">TO-DO</p>
-            </div>
-            <div class="header__registration">
-                <a class="header__registration__block" href="#">
-                    <img class="header__registration__img" th:src="@{img/user-unregister.svg}" alt="#">
-                    <p>Войти</p>
-                </a>
-                <button class="header__registration__button" href="#">
-                    <img class="header__registration__img" th:src="@{img/menu.svg}" alt="#">
-                </button>
-            </div>
-        </header>
+        <header th:insert="blocks/header"></header>
         <section class="main">
             <div class="main__content">
                 <table class="main__content__table">
-                    <tr onclick="location.href='google.com'">
+                    <tr th:onclick="|window.location.href='@{/index/one}'|">
+<!--                    <tr onclick="location.href= /*[[@{/index/one}]]*/ '/index/one'">-->
                         <td>1</td>
                         <td>Текст ссылки</td>
                         <td>Другие данные</td>
@@ -37,38 +25,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="nav">
-                <nav class="nav__menu">
-                    <ul class="nav__menu__list">
-                        <li>
-                            <a href="#">
-                                <img th:src="@{img/all.svg}" alt="#">
-                                <p class="nav__menu__list__name">Все</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img th:src="@{img/complete.svg}" alt="#">
-                                <p class="nav__menu__list__name">Выполненные</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img th:src="@{img/new.svg}" alt="#">
-                                <p class="nav__menu__list__name">Новые</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav__menu__list">
-                        <li>
-                            <a href="#">
-                                <img th:src="@{img/add.svg}" alt="#">
-                                <p class="nav__menu__list__name">Добавить</p>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <div class="nav" th:insert="blocks/nav"></div>
         </section>
     </div>
     <script th:src="@{js/menuScript.js}"></script>
