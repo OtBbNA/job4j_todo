@@ -1,0 +1,32 @@
+.main__content__head {
+    display: flex;
+    justify-content: space-between;
+
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    border-bottom: 1px solid var(--bg-blue-light-color);
+}
+
+.main__content__head>span {
+    margin-left: 30px;
+}
+
+.main__content__head__info {
+    margin-right: 30px;
+}
+
+.main__content__head__info>span {
+    font-size: var(--font-size-extra-light);
+}
+
+.main__content__head__text {
+    margin-left: 20px;
+    margin-right: 20px;
+
+    font-family: var(--font-family-main);
+    font-weight: 300;
+    line-height: 35px;
+    text-align: justify;
+}

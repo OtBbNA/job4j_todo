@@ -4,8 +4,15 @@
 }
 
 @font-face {
+    font-weight: 600;
     font-family: "Ysabeau Office";
     src: url("../fonts/YsabeauOffice-SemiBold.ttf");
+}
+
+@font-face {
+    font-weight: 300;
+    font-family: "Ysabeau Office";
+    src: url("../fonts/YsabeauOffice-Light.ttf");
 }
 
 :root {
@@ -22,6 +29,15 @@
     --font-family-main: 'Ysabeau Office', sans-serif;
     --font-family-header: 'Orbitron Medium', sans-serif;
 
+    --font-size-extra-light: 15px;
+    --font-size-tiny: 20px;
+    --font-size-light: 24px;
+    --font-size-medium: 35px;
+    --font-size-height: 50px;
+    --font-size-h4: 32px;
+    --font-size-h3: 36px;
+    --font-size-h2: 48px;
+    --font-size-h1: 58px;
 }
 
 /* Общие */
@@ -32,7 +48,7 @@
     margin: 0;
     padding: 0;
 
-    font-size: x-large;
+    font-size: var(--font-size-light);
     text-decoration: none;
 }
 
@@ -48,7 +64,8 @@ html {
 
     background-color: var(--bg-blue-pastel-color);
 
-    font-family: 'Ysabeau Office';
+    font-family: var(--font-family-main);
+    font-weight: 600;
 }
 
 .wrapper {
@@ -79,6 +96,13 @@ html {
     width: 100%;
 
     background-color: var(--bg-blue-light-color);
+
+    text-decoration: none;
+}
+
+.header>a {
+    text-decoration: none;
+    color: var(--black-color);
 }
 
 .header__logo {
@@ -94,7 +118,7 @@ html {
     padding-left: 10px;
 
     font-family: var(--font-family-header);
-    font-size: 50px;
+    font-size: var(--font-size-height);
 }
 
 .header__registration {
@@ -153,7 +177,10 @@ html {
 }
 
 .nav__menu__list {
-    margin-bottom: 20px;
+    margin-bottom: 11px;
+    padding-bottom: 9px;
+
+    border-bottom: 1px solid var(--dark-blue-color);
 
     text-decoration: none;
 
@@ -232,6 +259,8 @@ html {
     background-color: gray;
 }
 
+/* Медиазапросы */
+
 @media (max-width: 1232px) {
 
     /* Хедер */
@@ -240,13 +269,30 @@ html {
         display: none;
     }
 
-    /* Навигация */
+}
 
-    .nav {
-        width: 50px;
+@media (max-width: 579px) {
+
+    /* Хедер */
+
+    .header__logo__img {
+        width: 35px;
     }
 
-    .nav__menu__list>li>a>p {
+    .header__logo__text {
+        font-size: var(--font-size-light);
+    }
+
+    .header__registration__img {
         display: none;
+    }
+
+    .header__registration__block>p {
+        padding-top: 0px;
+    }
+
+    /* Рабочая область */
+    .main {
+        height: calc(100% - 44px);
     }
 }

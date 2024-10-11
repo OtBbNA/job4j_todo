@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{css/pageStyle.css}">
     <link rel="stylesheet" th:href="@{css/indexContentStyle.css}">
 
-    <title>Список</title>
+    <title>Список задач</title>
 </head>
 
 <body class="body">
@@ -17,11 +17,10 @@
             <div class="main__content">
                 <table class="main__content__table">
                     <tr th:onclick="|window.location.href='@{/index/one}'|">
-<!--                    <tr onclick="location.href= /*[[@{/index/one}]]*/ '/index/one'">-->
                         <td>1</td>
-                        <td>Текст ссылки</td>
-                        <td>Другие данные</td>
-                        <td>Другие данные</td>
+                        <td>Название таски</td>
+                        <td>Дата таски</td>
+                        <td>Состояние таски</td>
                     </tr>
                 </table>
             </div>

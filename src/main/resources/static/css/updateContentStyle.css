@@ -1,0 +1,32 @@
+.main__content__info {
+    margin-left: 20px;
+}
+
+.main__content__info>span {
+    font-size: var(--font-size-extra-light);
+}
+
+.main__content__name>textarea {
+    margin-left: 20px;
+
+    resize: none;
+    width: calc(100% - 20px);
+    height: 32px;
+}
+
+.main__content__text {
+    height: calc(100% - 79px);
+}
+
+.main__content__text>textarea {
+    margin-left: 20px;
+
+    resize: none;
+    width: calc(100% - 20px);
+    height: 100%;
+
+    font-family: var(--font-family-main);
+    font-weight: 300;
+    line-height: 35px;
+    text-align: justify;
+}

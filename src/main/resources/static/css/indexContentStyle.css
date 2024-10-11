@@ -11,7 +11,7 @@
 .main__content__table>tbody>tr>td {
     border-bottom: 1px solid gray;
 
-    font-size: 15px;
+    font-size: var(--font-size-tiny);
 }
 
 .main__content__table>tbody>tr:hover {
