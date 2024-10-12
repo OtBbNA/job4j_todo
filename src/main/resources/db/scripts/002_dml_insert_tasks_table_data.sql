@@ -1,0 +1,15 @@
+insert into tasks(description, created, done) values('Разработать интерфейс', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Разработать базу данных', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('html-верстка страниц', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Подключить css-стили', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Подключить js-скрипты', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Создать базу данных', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Подключить базу данных', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Создать модели', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Связать базу данных и модели через Hibernate', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Реализовать методы базы данных', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Создать сервисы', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Создать контроллеры страницы', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Связать контроллеры с БД через сервисы', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Связать представления с контроллерами', CURRENT_TIMESTAMP, false);
+insert into tasks(description, created, done) values('Сделать заднее сальто', CURRENT_TIMESTAMP, false);
