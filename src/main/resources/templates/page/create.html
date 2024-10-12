@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/pageStyle.css}">
-    <link rel="stylesheet" th:href="@{/css/createContentStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/changeContentStyle.css}">
 
     <title>Создать задачу</title>
 </head>
@@ -15,8 +15,14 @@
     <header th:insert="blocks/header"></header>
     <section class="main">
         <div class="main__content">
-            <div class="main__content__name">
-                <textarea  type="text" id="name" name="name" placeholder="Введите имя задачи"></textarea>
+            <div class="main__content__head">
+                <div class="main__content__name">
+                    <textarea type="text" id="name" name="name" placeholder="Введите имя задачи" required></textarea>
+                </div>
+                <div class="main__content__info">
+                    <span class="main__content__info__time"></span>
+                    <span>Новая</span>
+                </div>
             </div>
             <div class="main__content__text">
                 <textarea type="text" id="text" name="text" placeholder="Введите текст задачи"></textarea>
@@ -26,5 +32,6 @@
     </section>
 </div>
 <script th:src="@{/js/menuScript.js}"></script>
+<script th:src="@{/js/timeScript.js}"></script>
 </body>
 </html>

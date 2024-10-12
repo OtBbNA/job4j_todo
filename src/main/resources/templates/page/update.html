@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/pageStyle.css}">
-    <link rel="stylesheet" th:href="@{/css/updateContentStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/changeContentStyle.css}">
 
     <title>Редактировать</title>
 </head>
@@ -15,12 +15,14 @@
     <header th:insert="blocks/header"></header>
     <section class="main">
         <div class="main__content">
-            <div class="main__content__info">
-                <span>13.05.4567, 25:62</span>
-                <span>Новая</span>
-            </div>
-            <div class="main__content__name">
-                <textarea  type="text" id="name" name="name" th:field="*{text.text}" placeholder="Введите имя задачи"></textarea>
+            <div class="main__content__head">
+                <div class="main__content__name">
+                    <textarea type="text" id="name" name="name" th:field="*{text.text}" placeholder="Введите имя задачи" required></textarea>
+                </div>
+                <div class="main__content__info">
+                    <span>13.05.4567, 25:62</span>
+                    <span>Новая</span>
+                </div>
             </div>
             <div class="main__content__text">
                 <textarea type="text" id="text" name="text" th:field="*{text.text}" placeholder="Введите текст задачи"></textarea>
