@@ -3,12 +3,8 @@ package ru.job4j.todo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.service.TaskService;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping({"/", "/index"})
