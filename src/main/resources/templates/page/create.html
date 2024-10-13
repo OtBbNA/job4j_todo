@@ -11,27 +11,27 @@
 </head>
 
 <body class="body">
-<div class="wrapper">
+<form class="wrapper" th:action="@{/index/create}" th:object="${task}" method="post" enctype="multipart/form-data">
     <header th:insert="blocks/header"></header>
     <section class="main">
         <div class="main__content">
             <div class="main__content__head">
                 <div class="main__content__name">
-                    <textarea type="text" id="name" name="name" placeholder="Введите имя задачи" required></textarea>
+                    <textarea type="text" id="description" name="description" placeholder="Введите имя задачи" required></textarea>
                 </div>
                 <div class="main__content__info">
-                    <span class="main__content__info__time"></span>
-                    <span>Новая</span>
+                    <span class="main__content__info__time" id="created" name="created">00.00.0000, 00:00</span>
+                    <span class="task__state" id="done" name="done">Новая</span>
                 </div>
             </div>
             <div class="main__content__text">
-                <textarea type="text" id="text" name="text" placeholder="Введите текст задачи"></textarea>
+                <textarea type="text"placeholder="Введите текст задачи">ЭТО ОКНО ДЛЯ ВВОДА ТЕКСТА ЗАДАЧИ, НО НА ДАННЫЙ МОМЕНТ ВОЗМОЖНОСТЬ НЕ РАБОТАЕТ, ДЛЯ СОЗДАНИЯ ЗАДАЧ ПОЛЬЗУЙТЕСЬ ЗАГОЛОВКАМИ - БУДЬТЕ ЛАКОНИЧНЫ</textarea>
             </div>
         </div>
         <div class="nav" th:insert="blocks/nav"></div>
     </section>
-</div>
-<script th:src="@{/js/menuScript.js}"></script>
+</form>
+<script th:src="@{/js/menuCollapseScript.js}"></script>
 <script th:src="@{/js/timeScript.js}"></script>
 </body>
 </html>

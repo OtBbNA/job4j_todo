@@ -21,7 +21,7 @@ public class Task {
     @NonNull
     String description;
     @NonNull
-    LocalDateTime created;
+    LocalDateTime created = LocalDateTime.now();
     @NonNull
     boolean done;
 }

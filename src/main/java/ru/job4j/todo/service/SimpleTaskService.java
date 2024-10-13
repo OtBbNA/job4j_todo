@@ -6,6 +6,8 @@ import ru.job4j.todo.model.Task;
 import ru.job4j.todo.store.TaskStore;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,12 +32,16 @@ public class SimpleTaskService implements TaskService {
 
     @Override
     public Collection<Task> findAll() {
-        return taskStore.findAll();
+        return taskStore.findAll().stream()
+                .sorted(Comparator.comparing(Task::getId))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Collection<Task> findByDone(boolean done) {
-        return taskStore.findByDone(done);
+        return taskStore.findByDone(done).stream()
+                .sorted(Comparator.comparing(Task::getId))
+                .collect(Collectors.toList());
     }
 
     @Override
