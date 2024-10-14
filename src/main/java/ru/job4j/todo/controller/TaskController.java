@@ -8,11 +8,11 @@ import ru.job4j.todo.service.TaskService;
 
 @Controller
 @RequestMapping({"/", "/index"})
-public class IndexController {
+public class TaskController {
 
     private final TaskService taskService;
 
-    public IndexController(TaskService taskService) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 
@@ -40,7 +40,11 @@ public class IndexController {
     @GetMapping("/one/{id}")
     public String getOnePage(@PathVariable int id, Model model) {
         var task = taskService.findById(id);
-        model.addAttribute("task", task);
+        if (task.isEmpty()) {
+            model.addAttribute("message", "Произошла ошибка при обновлении");
+            return "errors/404";
+        }
+        model.addAttribute("task", task.get());
         return "page/one";
     }
 
@@ -57,27 +61,39 @@ public class IndexController {
 
     @GetMapping("/update/{id}")
     public String getUpdatePage(@PathVariable int id, Model model) {
-        model.addAttribute("task", taskService.findById(id));
+        var task = taskService.findById(id);
+        if (task.isEmpty()) {
+            model.addAttribute("message", "Произошла ошибка при обновлении");
+            return "errors/404";
+        }
+        model.addAttribute("task", task.get());
         return "page/update";
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Task task) {
-        taskService.update(task);
+    public String update(@ModelAttribute Task task, Model model) {
+        if (!taskService.update(task)) {
+            model.addAttribute("message", "Произошла ошибка при обновлении");
+            return "errors/404";
+        }
         return "redirect:/index";
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePage(@PathVariable int id) {
-        taskService.deleteById(id);
+    public String deletePage(@PathVariable int id, Model model) {
+        if (!taskService.deleteById(id)) {
+            model.addAttribute("message", "Произошла ошибка при удалении");
+            return "errors/404";
+        }
         return "redirect:/index";
     }
 
     @GetMapping("/complete/{id}")
-    public String completeTask(@PathVariable int id) {
-        Task task = taskService.findById(id);
-        task.setDone(true);
-        taskService.update(task);
+    public String completeTask(@PathVariable int id, Model model) {
+        if (!taskService.updateDoneToTrue(id)) {
+            model.addAttribute("message", "Произошла ошибка при изменении статуса");
+            return "errors/404";
+        }
         return "redirect:/index";
     }
 }

@@ -7,6 +7,7 @@ import ru.job4j.todo.store.TaskStore;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,12 @@ public class SimpleTaskService implements TaskService {
     }
 
     @Override
-    public Task findById(int id) {
+    public boolean updateDoneToTrue(int id) {
+        return taskStore.updateDoneToTrue(id);
+    }
+
+    @Override
+    public Optional<Task> findById(int id) {
         return taskStore.findById(id);
     }
 
@@ -45,7 +51,7 @@ public class SimpleTaskService implements TaskService {
     }
 
     @Override
-    public void deleteById(int id) {
-        taskStore.deleteById(id);
+    public boolean deleteById(int id) {
+        return taskStore.deleteById(id);
     }
 }

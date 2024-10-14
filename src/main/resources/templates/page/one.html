@@ -16,13 +16,13 @@
         <section class="main">
             <div class="main__content">
                 <div class="main__content__head">
-                    <span th:text="${task.description}">Название</span>
+                    <span th:text="${task.title}">Название</span>
                     <div class="main__content__head__info">
                         <span th:text="${{task.created}}">00.00.0000, 00:00</span>
                         <span class="task__state" th:text="${task.done ? 'Готово' : 'Новая'}">Новая</span>
                     </div>
                 </div>
-                <div class="main__content__head__text">ЭТО ОКНО ДЛЯ ВВОДА ТЕКСТА ЗАДАЧИ, НО НА ДАННЫЙ МОМЕНТ ВОЗМОЖНОСТЬ НЕ РАБОТАЕТ, ДЛЯ СОЗДАНИЯ ЗАДАЧ ПОЛЬЗУЙТЕСЬ ЗАГОЛОВКАМИ - БУДЬТЕ ЛАКОНИЧНЫ</div>
+                <div class="main__content__head__text" th:text="${task.description}">Описание задачи</div>
             </div>
             <div class="nav" th:insert="blocks/nav"></div>
         </section>

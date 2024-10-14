@@ -10,6 +10,7 @@ import ru.job4j.todo.model.Task;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
@@ -40,13 +41,36 @@ public class SimpleTaskStore implements TaskStore {
         Session session = sf.getCurrentSession();
         try {
             session.beginTransaction();
-            session.createQuery(
-                            "UPDATE Task SET description = :fDescription, done = :fDone WHERE id = :fId")
+            int updated = session.createQuery(
+                            "UPDATE Task SET title = :fTitle, description = :fDescription WHERE id = :fId")
                     .setParameter("fId", task.getId())
+                    .setParameter("fTitle", task.getTitle())
                     .setParameter("fDescription", task.getDescription())
-                    .setParameter("fDone", task.isDone())
                     .executeUpdate();
-            rsl = true;
+            session.getTransaction().commit();
+            rsl = updated > 0;
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return rsl;
+    }
+
+    @Override
+    public boolean updateDoneToTrue(int id) {
+        boolean rsl = false;
+        Session session = sf.getCurrentSession();
+        try {
+            session.beginTransaction();
+            int updated = session.createQuery(
+                            "UPDATE Task SET done = :fDone WHERE id = :fId")
+                    .setParameter("fId", id)
+                    .setParameter("fDone", true)
+                    .executeUpdate();
+            rsl = updated > 0;
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -59,13 +83,13 @@ public class SimpleTaskStore implements TaskStore {
     }
 
     @Override
-    public Task findById(int id) {
-        Task rsl = null;
+    public Optional<Task> findById(int id) {
+        Optional rsl = Optional.empty();
         Session session = sf.getCurrentSession();
         try {
             session.getTransaction().begin();
             Query<Task> query = session.createQuery("FROM Task AS i WHERE i.id = :fId", Task.class).setParameter("fId", id);
-            rsl = query.uniqueResult();
+            rsl = query.uniqueResultOptional();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -116,15 +140,17 @@ public class SimpleTaskStore implements TaskStore {
     }
 
     @Override
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
+        boolean rsl = false;
         Session session = sf.getCurrentSession();
         try {
             session.beginTransaction();
-            session.createQuery(
+            int updated = session.createQuery(
                             "DELETE Task WHERE id = :fId")
                     .setParameter("fId", id)
                     .executeUpdate();
             session.getTransaction().commit();
+            rsl = updated > 0;
         } catch (Exception e) {
             session.getTransaction().rollback();
         } finally {
@@ -132,5 +158,6 @@ public class SimpleTaskStore implements TaskStore {
                 session.close();
             }
         }
+        return rsl;
     }
 }

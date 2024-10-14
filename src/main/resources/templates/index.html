@@ -18,7 +18,7 @@
                 <table class="main__content__table">
                     <tr th:each="task: ${tasks}" th:onclick="|window.location.href='@{/index/one/{taskId}(taskId=${task.id})}'|">
                         <td th:text="${task.id}">Индекс</td>
-                        <td th:text="${task.description}">Название таски</td>
+                        <td th:text="${task.title}">Название таски</td>
                         <td th:text="${{task.created}}">Дата таски</td>
                         <td class="task__state" th:text="${task.done ? 'Готово' : 'Новая'}">Состояние таски</td>
                     </tr>

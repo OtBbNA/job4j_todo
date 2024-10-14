@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/pageStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/404Style.css}">
+
+    <title>Ошибка 404</title>
+</head>
+
+<body class="body">
+<div class="wrapper">
+    <header th:insert="blocks/header"></header>
+    <section class="main">
+        <div class="main__content">
+            <p class="main__content__error__head">Error 404</p>
+            <p class="main__content__error__text" th:text="${message}">Непредвиденная работа программы</p>
+            <a class="main__content__error__link" th:href="@{/}">На главную</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>

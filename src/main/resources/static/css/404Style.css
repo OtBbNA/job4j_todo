@@ -1,0 +1,36 @@
+.header__menu__button {
+    display: none;
+}
+
+.main__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin: 10px 0px 0px 0px;
+    padding-top: 20px;
+}
+
+.main__content>p {
+    padding-bottom: 10px;
+}
+
+.main__content__error__head {
+    font-size: var(--font-size-medium);
+    color: var(--red-color);
+}
+
+.main__content__error__text {
+    color: var(--dark-blue-color);
+}
+
+.main__content__error__link {
+    padding: 4px 10px 6px 10px;
+
+    border-radius: 15px;
+
+    background-color: var(--green-color);
+
+    color: var(--dark-blue-color);
+}
