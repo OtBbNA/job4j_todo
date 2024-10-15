@@ -28,5 +28,5 @@ public class Task {
     @NonNull
     private LocalDateTime created = LocalDateTime.now();
 
-    boolean done;
+    private boolean done;
 }

@@ -19,35 +19,35 @@
             </a>
         </li>
     </ul>
-    <ul class="nav__menu__list" th:unless="${#strings.equalsIgnoreCase(#httpServletRequest.requestURI, '/index/create')}">
+    <ul class="nav__menu__list" th:unless="${#strings.equalsIgnoreCase(#httpServletRequest.requestURI, '/task/create')}">
         <li>
-            <a th:href="@{/index/create}">
+            <a th:href="@{/task/create}">
                 <img th:src="@{/img/add.svg}" alt="#">
                 <p class="nav__menu__list__name">Добавить</p>
             </a>
         </li>
     </ul>
-    <ul class="nav__menu__list" th:if="${#httpServletRequest.requestURI.startsWith('/index/one/')}">
+    <ul class="nav__menu__list" th:if="${#httpServletRequest.requestURI.startsWith('/task/one/')}">
         <li th:if="${!task.done}">
-            <a th:href="@{/index/complete/{taskId}(taskId=${task.id})}">
+            <a th:href="@{/task/complete/{taskId}(taskId=${task.id})}">
                 <img th:src="@{/img/check.svg}" alt="#">
                 <p class="nav__menu__list__name">Выполнено</p>
             </a>
         </li>
         <li>
-            <a th:href="@{/index/update/{taskId}(taskId=${task.id})}">
+            <a th:href="@{/task/update/{taskId}(taskId=${task.id})}">
                 <img th:src="@{/img/edit.svg}" alt="#">
                 <p class="nav__menu__list__name">Редактировать</p>
             </a>
         </li>
         <li>
-            <a th:href="@{/index/delete/{taskId}(taskId=${task.id})}">
+            <a th:href="@{/task/delete/{taskId}(taskId=${task.id})}">
                 <img th:src="@{/img/delete.svg}" alt="#">
                 <p class="nav__menu__list__name">Удалить</p>
             </a>
         </li>
     </ul>
-    <ul class="nav__menu__list" th:if="${#httpServletRequest.requestURI.startsWith('/index/update/')}">
+    <ul class="nav__menu__list" th:if="${#httpServletRequest.requestURI.startsWith('/task/update/')}">
         <li>
             <button type="submit">
                 <img th:src="@{/img/check.svg}" alt="#">
@@ -55,13 +55,13 @@
             </button>
         </li>
         <li>
-            <a th:href="@{/index/one/{taskId}(taskId=${id})}">
+            <a th:href="@{/task/one/{taskId}(taskId=${id})}">
                 <img th:src="@{/img/rollback.svg}" alt="#">
                 <p class="nav__menu__list__name">Отмена</p>
             </a>
         </li>
     </ul>
-    <ul class="nav__menu__list" th:if="${#strings.equalsIgnoreCase(#httpServletRequest.requestURI, '/index/create')}">
+    <ul class="nav__menu__list" th:if="${#strings.equalsIgnoreCase(#httpServletRequest.requestURI, '/task/create')}">
         <li>
             <button type="submit">
                 <img th:src="@{/img/check.svg}" alt="#">

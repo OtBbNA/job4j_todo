@@ -1,5 +1,6 @@
 package ru.job4j.todo.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,16 +8,13 @@ import ru.job4j.todo.model.Task;
 import ru.job4j.todo.service.TaskService;
 
 @Controller
-@RequestMapping({"/", "/index"})
+@RequestMapping({"task"})
+@AllArgsConstructor
 public class TaskController {
 
     private final TaskService taskService;
 
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
-
-    @GetMapping()
+    @GetMapping({"/all"})
     public String getIndexPage(Model model) {
         var tasks = taskService.findAll();
         model.addAttribute("tasks", tasks);
