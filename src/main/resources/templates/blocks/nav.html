@@ -7,13 +7,13 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/index/completed}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/index/completed') ? ' active' : ''}">
+            <a th:href="@{/task/completed}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/task/completed') ? ' active' : ''}">
                 <img th:src="@{/img/completed.svg}" alt="#">
                 <p class="nav__menu__list__name">Выполненные</p>
             </a>
         </li>
         <li>
-            <a th:href="@{/index/new}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/index/new') ? ' active' : ''}">
+            <a th:href="@{/task/new}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/task/new') ? ' active' : ''}">
                 <img th:src="@{/img/new.svg}" alt="#">
                 <p class="nav__menu__list__name">Новые</p>
             </a>

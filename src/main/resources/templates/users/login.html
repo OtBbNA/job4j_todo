@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/pageStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/userStyle.css}">
+
+    <title>Войти</title>
+</head>
+
+<body class="body">
+<div class="wrapper">
+    <header th:insert="blocks/header"></header>
+    <section class="main">
+        <form class="main__content" th:action="@{/users/login}" method="post">
+            <div class="main__content__logo">
+                <img class="main__content__logo__img" th:src="@{/img/logo.svg}" alt="#">
+                <p class="main__content__logo__text">TO-DO</p>
+            </div>
+            <p>Почта</p>
+            <input type="text" class="form-control" id="login" name="login" placeholder="ivan@mail.ru" required>
+            <p>Пароль</p>
+            <input type="password" class="form-control" id="password" name="password" maxlength="16" required>
+            <button class="main__content__button" type="submit">Войти</button>
+            <p>Не зарегистрированы?</p>
+            <a th:href="@{/users/register}">Зарегистрироваться</a>
+        </form>
+    </section>
+</div>
+</body>
+</html>

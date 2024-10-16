@@ -5,9 +5,14 @@
             <p class="header__logo__text">TO-DO</p>
         </div>
         <div class="header__registration">
-            <a class="header__registration__block" href="#">
+            <a class="header__registration__block" th:href="@{/users/login}">
                 <img class="header__registration__img" th:src="@{/img/user-unregister.svg}" alt="#">
-                <p>Войти</p>
+                <p th:if="${user.name == 'Гость'}">Войти</p>
+                <p th:if="${user.name != 'Гость'}" th:text="${user.name}"></p>
+            </a>
+            <a class="header__registration__block" th:if="${user.name != 'Гость'}" th:href="@{/users/logout}">
+                <img class="header__registration__img" th:src="@{/img/logout.svg}" alt="#">
+                <p>Выйти</p>
             </a>
             <div class="header__menu__button">
                 <img class="header__menu__button__img" th:src="@{/img/menu.svg}" alt="#">
