@@ -13,7 +13,8 @@
 <body class="body">
 <div class="wrapper">
     <section class="main">
-        <form class="main__content" th:action="@{/users/login}" method="post">
+        <form class="main__content" th:action="@{/users/register}" method="post">
+            <p th:if="${error}" th:text="${error}"></p>
             <div class="main__content__logo">
                 <img class="main__content__logo__img" th:src="@{/img/logo.svg}" alt="#">
                 <p class="main__content__logo__text">TO-DO</p>

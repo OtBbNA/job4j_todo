@@ -55,6 +55,12 @@
     color: var(--bg-gray-light-color);
 }
 
+.main__content>p:first-child {
+    margin-bottom: 15px;
+
+    color: var(--red-color);
+}
+
 .main__content>input {
     margin-bottom: 15px;
 
