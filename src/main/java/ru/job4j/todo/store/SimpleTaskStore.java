@@ -1,60 +1,47 @@
 package ru.job4j.todo.store;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Task;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SimpleTaskStore implements TaskStore {
 
-    private final SessionFactory sf;
+    @NonNull
+    private final CrudRepository crudRepository;
+
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleTaskStore.class);
 
     @Override
     public Task save(Task task) {
-        Session session = sf.getCurrentSession();
+        Task rsl = null;
         try {
-            session.beginTransaction();
-            session.save(task);
-            session.getTransaction().commit();
+            crudRepository.run(session -> session.persist(task));
+            rsl = task;
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Ошибка при сохранении задачи: " + e.getMessage());
         }
-        return task;
+        return rsl;
     }
 
     @Override
     public boolean update(Task task) {
         boolean rsl = false;
-        Session session = sf.getCurrentSession();
         try {
-            session.beginTransaction();
-            int updated = session.createQuery(
-                            "UPDATE Task SET title = :fTitle, description = :fDescription WHERE id = :fId")
-                    .setParameter("fId", task.getId())
-                    .setParameter("fTitle", task.getTitle())
-                    .setParameter("fDescription", task.getDescription())
-                    .executeUpdate();
-            session.getTransaction().commit();
-            rsl = updated > 0;
+            crudRepository.run(
+                    "UPDATE Task SET title = :fTitle, description = :fDescription WHERE id = :fId",
+                    Map.of("fId", task.getId(), "fTitle", task.getTitle(), "fDescription", task.getDescription())
+            );
+            rsl = true;
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Ошибка при обновлении задачи: " + e.getMessage());
         }
         return rsl;
     }
@@ -62,41 +49,22 @@ public class SimpleTaskStore implements TaskStore {
     @Override
     public boolean updateDoneToTrue(int id) {
         boolean rsl = false;
-        Session session = sf.getCurrentSession();
         try {
-            session.beginTransaction();
-            int updated = session.createQuery(
-                            "UPDATE Task SET done = :fDone WHERE id = :fId")
-                    .setParameter("fId", id)
-                    .setParameter("fDone", true)
-                    .executeUpdate();
-            rsl = updated > 0;
-            session.getTransaction().commit();
+            crudRepository.run("UPDATE Task SET done = :fDone WHERE id = :fId", Map.of("fId", id, "fDone", true));
+            rsl = true;
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Ошибка при обновлении статуса задачи: " + e.getMessage());
         }
         return rsl;
     }
 
     @Override
     public Optional<Task> findById(int id) {
-        Optional rsl = Optional.empty();
-        Session session = sf.getCurrentSession();
+        Optional<Task> rsl = Optional.empty();
         try {
-            session.getTransaction().begin();
-            Query<Task> query = session.createQuery("FROM Task AS i WHERE i.id = :fId", Task.class).setParameter("fId", id);
-            rsl = query.uniqueResultOptional();
-            session.getTransaction().commit();
+             rsl = crudRepository.optional("FROM Task AS i WHERE i.id = :fId", Task.class, Map.of("fId", id));
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Ошибка при обновлении статуса задачи: " + e.getMessage());
         }
         return rsl;
     }
@@ -104,18 +72,10 @@ public class SimpleTaskStore implements TaskStore {
     @Override
     public Collection<Task> findAll() {
         List<Task> rsl = new ArrayList<>();
-        Session session = sf.getCurrentSession();
-        try {
-            session.getTransaction().begin();
-            Query<Task> query = session.createQuery("FROM Task", Task.class);
-            rsl = query.getResultList();
-            session.getTransaction().commit();
+        try  {
+            rsl = crudRepository.query("FROM Task", Task.class);
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
         }
         return rsl;
     }
@@ -123,18 +83,10 @@ public class SimpleTaskStore implements TaskStore {
     @Override
     public Collection<Task> findByDone(boolean done) {
         List<Task> rsl = new ArrayList<>();
-        Session session = sf.getCurrentSession();
         try {
-            session.getTransaction().begin();
-            Query<Task> query = session.createQuery("FROM Task AS i WHERE i.done = :fDone", Task.class).setParameter("fDone", done);
-            rsl = query.getResultList();
-            session.getTransaction().commit();
+            rsl = crudRepository.query("FROM Task AS i WHERE i.done = :fDone", Task.class, Map.of("fDone", done));
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
         }
         return rsl;
     }
@@ -142,21 +94,11 @@ public class SimpleTaskStore implements TaskStore {
     @Override
     public boolean deleteById(int id) {
         boolean rsl = false;
-        Session session = sf.getCurrentSession();
         try {
-            session.beginTransaction();
-            int updated = session.createQuery(
-                            "DELETE Task WHERE id = :fId")
-                    .setParameter("fId", id)
-                    .executeUpdate();
-            session.getTransaction().commit();
-            rsl = updated > 0;
+            crudRepository.run("DELETE Task WHERE id = :fId", Map.of("fId", id));
+            rsl = true;
         } catch (Exception e) {
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            LOG.error("Произошла ошибка при удалении: " + e.getMessage());
         }
         return rsl;
     }
