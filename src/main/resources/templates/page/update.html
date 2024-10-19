@@ -21,8 +21,11 @@
                     <textarea type="text" id="title" name="title" th:field="*{title}" placeholder="Введите имя задачи" required></textarea>
                 </div>
                 <div class="main__content__info">
-                    <span id="created" name="created" th:text="*{{created}}">00.00.0000, 00:00</span>
-                    <span class="task__state" id="done" name="done" th:text="*{done ? 'Готово' : 'Новая'}">Новая</span>
+                    <span id="user" name="user" th:field="*{user}" th:text="*{user.name}">Автор</span>
+                    <p>
+                        <span id="created" name="created" th:text="*{{created}}">00.00.0000, 00:00</span>
+                        <span class="task__state" id="done" name="done" th:text="*{done ? 'Готово' : 'Новая'}">Новая</span>
+                    </p>
                 </div>
             </div>
             <div class="main__content__text">

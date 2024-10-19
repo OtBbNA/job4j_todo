@@ -5,7 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.Task;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.TaskService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping({"task"})
@@ -52,8 +55,11 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Task task, Model model) {
+    public String create(@ModelAttribute Task task, Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        task.setUser(user);
         taskService.save(task);
+        model.addAttribute("user", user);
         return "redirect:/index";
     }
 
@@ -69,7 +75,8 @@ public class TaskController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Task task, Model model) {
+    public String update(@ModelAttribute Task task, Model model, HttpSession session) {
+        task.setUser((User) session.getAttribute("user"));
         if (!taskService.update(task)) {
             model.addAttribute("message", "Произошла ошибка при обновлении");
             return "errors/404";

@@ -75,4 +75,19 @@
             </a>
         </li>
     </ul>
+    <ul class="nav__menu__list">
+<!--        <li>-->
+<!--            <a th:href="@{/}">-->
+<!--                <img th:src="@{/img/user-unregister.svg}" alt="#">-->
+<!--                <p th:if="${user.name == 'Гость'}">Войти</p>-->
+<!--                <p th:if="${user.name != 'Гость'}" th:text="${user.name}"></p>-->
+<!--            </a>-->
+<!--        </li>-->
+        <li>
+            <a th:if="${user.name != 'Гость'}" th:href="@{/users/logout}">
+                <img th:src="@{/img/logout.svg}" alt="#">
+                <p>Выйти</p>
+            </a>
+        </li>
+    </ul>
 </nav>

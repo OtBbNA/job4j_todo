@@ -20,8 +20,11 @@
                     <textarea type="text" id="title" name="title" placeholder="Введите имя задачи" required></textarea>
                 </div>
                 <div class="main__content__info">
-                    <span class="main__content__info__time" id="created" name="created">00.00.0000, 00:00</span>
-                    <span class="task__state" id="done" name="done">Новая</span>
+                    <span id="user" name="user" th:text="${user.name}">Автор</span>
+                    <p>
+                        <span class="main__content__info__time" id="created" name="created">00.00.0000, 00:00</span>
+                        <span class="task__state" id="done" name="done">Новая</span>
+                    </p>
                 </div>
             </div>
             <div class="main__content__text">

@@ -36,8 +36,11 @@ public class SimpleTaskStore implements TaskStore {
         boolean rsl = false;
         try {
             crudRepository.run(
-                    "UPDATE Task SET title = :fTitle, description = :fDescription WHERE id = :fId",
-                    Map.of("fId", task.getId(), "fTitle", task.getTitle(), "fDescription", task.getDescription())
+                    "UPDATE Task SET title = :fTitle, description = :fDescription, user_id = :fUserId WHERE id = :fId",
+                    Map.of("fId", task.getId(),
+                            "fTitle", task.getTitle(),
+                            "fDescription", task.getDescription(),
+                            "fUserId", task.getUser().getId())
             );
             rsl = true;
         } catch (Exception e) {
@@ -50,7 +53,8 @@ public class SimpleTaskStore implements TaskStore {
     public boolean updateDoneToTrue(int id) {
         boolean rsl = false;
         try {
-            crudRepository.run("UPDATE Task SET done = :fDone WHERE id = :fId", Map.of("fId", id, "fDone", true));
+            crudRepository.run("UPDATE Task SET done = :fDone WHERE id = :fId",
+                    Map.of("fId", id, "fDone", true));
             rsl = true;
         } catch (Exception e) {
             LOG.error("Ошибка при обновлении статуса задачи: " + e.getMessage());

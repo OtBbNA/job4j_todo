@@ -11,14 +11,15 @@
 
 .main__content__info {
     margin-right: 30px;
+    line-height: 13px;
 }
 
-.main__content__info>span {
+.main__content__info>span, .main__content__info>p>span {
     font-size: var(--font-size-extra-light);
 }
 
 .main__content__name {
-    width: calc(100% - 220px);
+    width: calc(100% - 338px);
     height: 32px;
 }
 

@@ -18,8 +18,11 @@
                 <div class="main__content__head">
                     <span th:text="${task.title}">Название</span>
                     <div class="main__content__head__info">
-                        <span th:text="${{task.created}}">00.00.0000, 00:00</span>
-                        <span class="task__state" th:text="${task.done ? 'Готово' : 'Новая'}">Новая</span>
+                        <span th:text="${task.user.name}">Автор</span>
+                        <p>
+                            <span th:text="${{task.created}}">00.00.0000, 00:00</span>
+                            <span class="task__state" th:text="${task.done ? 'Готово' : 'Новая'}">Новая</span>
+                        </p>
                     </div>
                 </div>
                 <div class="main__content__head__text" th:text="${task.description}">Описание задачи</div>

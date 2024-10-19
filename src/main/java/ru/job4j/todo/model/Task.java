@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -29,4 +30,9 @@ public class Task {
     private LocalDateTime created = LocalDateTime.now();
 
     private boolean done;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

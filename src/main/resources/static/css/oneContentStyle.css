@@ -15,9 +15,10 @@
 
 .main__content__head__info {
     margin-right: 30px;
+    line-height: 13px;
 }
 
-.main__content__head__info>span {
+.main__content__head__info>span, .main__content__head__info>p>span {
     font-size: var(--font-size-extra-light);
 }
 
