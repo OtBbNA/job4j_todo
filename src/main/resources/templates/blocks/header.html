@@ -4,15 +4,10 @@
             <img class="header__logo__img" th:src="@{/img/logo.svg}" alt="#">
             <p class="header__logo__text">TO-DO</p>
         </div>
+    </a>
         <div class="header__registration">
-            <a class="header__registration__block" th:href="@{/}">
-                <img class="header__registration__img" th:src="@{/img/user-unregister.svg}" alt="#">
-                <p th:if="${user.name == 'Гость'}">Войти</p>
-                <p th:if="${user.name != 'Гость'}" th:text="${user.name}"></p>
-            </a>
             <div class="header__menu__button">
                 <img class="header__menu__button__img" th:src="@{/img/menu.svg}" alt="#">
             </div>
         </div>
-    </a>
 </header>

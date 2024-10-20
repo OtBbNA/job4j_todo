@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Task;
+import ru.job4j.todo.model.User;
 
 import java.util.*;
 
@@ -68,16 +69,17 @@ public class SimpleTaskStore implements TaskStore {
         try {
              rsl = crudRepository.optional("FROM Task AS i WHERE i.id = :fId", Task.class, Map.of("fId", id));
         } catch (Exception e) {
-            LOG.error("Ошибка при обновлении статуса задачи: " + e.getMessage());
+            LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
         }
         return rsl;
     }
 
     @Override
-    public Collection<Task> findAll() {
+    public Collection<Task> findByUser(User user) {
         List<Task> rsl = new ArrayList<>();
-        try  {
-            rsl = crudRepository.query("FROM Task", Task.class);
+        try {
+            rsl = crudRepository.query("FROM Task AS i WHERE i.user = :fUser", Task.class,
+                    Map.of("fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
         }
@@ -85,10 +87,11 @@ public class SimpleTaskStore implements TaskStore {
     }
 
     @Override
-    public Collection<Task> findByDone(boolean done) {
+    public Collection<Task> findByDoneAndUser(boolean done, User user) {
         List<Task> rsl = new ArrayList<>();
         try {
-            rsl = crudRepository.query("FROM Task AS i WHERE i.done = :fDone", Task.class, Map.of("fDone", done));
+            rsl = crudRepository.query("FROM Task AS i WHERE i.done = :fDone AND i.user = :fUser", Task.class,
+                    Map.of("fDone", done, "fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
         }

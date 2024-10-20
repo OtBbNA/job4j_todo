@@ -18,22 +18,25 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping({"/all"})
-    public String getIndexPage(Model model) {
-        var tasks = taskService.findAll();
+    public String getIndexPage(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        var tasks = taskService.findByUser(user);
         model.addAttribute("tasks", tasks);
         return "index";
     }
 
     @GetMapping("/completed")
-    public String getCompleted(Model model) {
-        var tasks = taskService.findByDone(true);
+    public String getCompleted(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        var tasks = taskService.findByDoneAndUser(true, user);
         model.addAttribute("tasks", tasks);
         return "index";
     }
 
     @GetMapping("/new")
-    public String getNew(Model model) {
-        var tasks = taskService.findByDone(false);
+    public String getNew(Model model, HttpSession session) {
+        var user = (User) session.getAttribute("user");
+        var tasks = taskService.findByDoneAndUser(false, user);
         model.addAttribute("tasks", tasks);
         return "index";
     }
@@ -66,6 +69,7 @@ public class TaskController {
     @GetMapping("/update/{id}")
     public String getUpdatePage(@PathVariable int id, Model model) {
         var task = taskService.findById(id);
+
         if (task.isEmpty()) {
             model.addAttribute("message", "Произошла ошибка при обновлении");
             return "errors/404";

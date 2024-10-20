@@ -1,6 +1,15 @@
 <nav class="nav__menu">
     <ul class="nav__menu__list">
         <li>
+            <a th:href="@{/}">
+                <img th:src="@{/img/user-unregister.svg}" alt="#">
+                <p class="nav__menu__list__name" th:if="${user.name == 'Гость'}">Войти</p>
+                <p class="nav__menu__list__name" th:if="${user.name != 'Гость'}" th:text="${user.name}"></p>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav__menu__list">
+        <li>
             <a th:href="@{/}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/') ? ' active' : ''}">
                 <img th:src="@{/img/all.svg}" alt="#">
                 <p class="nav__menu__list__name">Все</p>
@@ -86,7 +95,7 @@
         <li>
             <a th:if="${user.name != 'Гость'}" th:href="@{/users/logout}">
                 <img th:src="@{/img/logout.svg}" alt="#">
-                <p>Выйти</p>
+                <p class="nav__menu__list__name">Выйти</p>
             </a>
         </li>
     </ul>
