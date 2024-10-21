@@ -67,7 +67,7 @@ public class SimpleTaskStore implements TaskStore {
     public Optional<Task> findById(int id) {
         Optional<Task> rsl = Optional.empty();
         try {
-             rsl = crudRepository.optional("FROM Task AS i WHERE i.id = :fId", Task.class, Map.of("fId", id));
+             rsl = crudRepository.optional("FROM Task AS i JOIN FETCH i.priority WHERE i.id = :fId", Task.class, Map.of("fId", id));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
         }
@@ -78,7 +78,7 @@ public class SimpleTaskStore implements TaskStore {
     public Collection<Task> findByUser(User user) {
         List<Task> rsl = new ArrayList<>();
         try {
-            rsl = crudRepository.query("FROM Task AS i WHERE i.user = :fUser", Task.class,
+            rsl = crudRepository.query("FROM Task AS i JOIN FETCH i.priority WHERE i.user = :fUser", Task.class,
                     Map.of("fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
@@ -90,7 +90,7 @@ public class SimpleTaskStore implements TaskStore {
     public Collection<Task> findByDoneAndUser(boolean done, User user) {
         List<Task> rsl = new ArrayList<>();
         try {
-            rsl = crudRepository.query("FROM Task AS i WHERE i.done = :fDone AND i.user = :fUser", Task.class,
+            rsl = crudRepository.query("FROM Task AS i JOIN FETCH i.priority WHERE i.done = :fDone AND i.user = :fUser", Task.class,
                     Map.of("fDone", done, "fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
