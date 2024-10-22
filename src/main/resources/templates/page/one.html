@@ -14,9 +14,13 @@
     <div class="wrapper">
         <header th:insert="blocks/header"></header>
         <section class="main">
+            <div class="nav" th:insert="blocks/nav"></div>
             <div class="main__content">
                 <div class="main__content__head">
-                    <span th:text="${task.title}">Название</span>
+                    <div class="main__content__head__name">
+                        <span th:text="${task.title}">Название</span>
+                    </div>
+                    <p class="main__content__head__priority" for="priority">Приоритет:<span th:text="${task.priority.position}"></span></p>
                     <div class="main__content__head__info">
                         <span th:text="${task.user.name}">Автор</span>
                         <p>
@@ -27,7 +31,6 @@
                 </div>
                 <div class="main__content__head__text" th:text="${task.description}">Описание задачи</div>
             </div>
-            <div class="nav" th:insert="blocks/nav"></div>
         </section>
     </div>
     <script th:src="@{/js/menuCollapseScript.js}"></script>

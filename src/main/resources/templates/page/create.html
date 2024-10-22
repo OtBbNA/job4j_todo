@@ -14,10 +14,17 @@
 <form class="wrapper" th:action="@{/task/create}" th:object="${task}" method="post" enctype="multipart/form-data">
     <header th:insert="blocks/header"></header>
     <section class="main">
+        <div class="nav" th:insert="blocks/nav"></div>
         <div class="main__content">
             <div class="main__content__head">
                 <div class="main__content__name">
                     <textarea type="text" id="title" name="title" placeholder="Введите имя задачи" required></textarea>
+                </div>
+                <div class="main__content__priority">
+                    <label for="priority">Приоритет:</label>
+                    <select name="priority.id" id="priority">
+                        <option th:each="priority: ${priorities}" th:value="${priority.id}" th:text="${priority.position}">Приоритет задачи</option>
+                    </select>
                 </div>
                 <div class="main__content__info">
                     <span id="user" name="user" th:text="${user.name}">Автор</span>
@@ -31,7 +38,6 @@
                 <textarea type="text" id="description" name="description" placeholder="Введите описание задачи"></textarea>
             </div>
         </div>
-        <div class="nav" th:insert="blocks/nav"></div>
     </section>
 </form>
 <script th:src="@{/js/menuCollapseScript.js}"></script>

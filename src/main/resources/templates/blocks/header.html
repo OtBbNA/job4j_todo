@@ -1,13 +1,13 @@
 <header class="header">
-    <a th:href="@{/}">
-        <div class="header__logo">
-            <img class="header__logo__img" th:src="@{/img/logo.svg}" alt="#">
-            <p class="header__logo__text">TO-DO</p>
+    <div class="header__registration">
+        <div class="header__menu__button">
+            <img class="header__menu__button__img" th:src="@{/img/menu.svg}" alt="#">
         </div>
-    </a>
-        <div class="header__registration">
-            <div class="header__menu__button">
-                <img class="header__menu__button__img" th:src="@{/img/menu.svg}" alt="#">
+        <a th:href="@{/}">
+            <div class="header__logo">
+                <img class="header__logo__img" th:src="@{/img/logo.svg}" alt="#">
+                <p class="header__logo__text">TO-DO</p>
             </div>
-        </div>
+        </a>
+    </div>
 </header>

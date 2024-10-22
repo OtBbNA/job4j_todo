@@ -37,11 +37,12 @@ public class SimpleTaskStore implements TaskStore {
         boolean rsl = false;
         try {
             crudRepository.run(
-                    "UPDATE Task SET title = :fTitle, description = :fDescription, user_id = :fUserId WHERE id = :fId",
+                    "UPDATE Task SET title = :fTitle, description = :fDescription, user_id = :fUserId, priority = :fPriority WHERE id = :fId",
                     Map.of("fId", task.getId(),
                             "fTitle", task.getTitle(),
                             "fDescription", task.getDescription(),
-                            "fUserId", task.getUser().getId())
+                            "fUserId", task.getUser().getId(),
+                                "fPriority", task.getPriority())
             );
             rsl = true;
         } catch (Exception e) {

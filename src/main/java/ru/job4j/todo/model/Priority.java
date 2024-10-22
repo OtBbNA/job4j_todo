@@ -1,6 +1,7 @@
 package ru.job4j.todo.model;
 
 import javax.persistence.*;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

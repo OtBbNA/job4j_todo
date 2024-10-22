@@ -84,10 +84,10 @@ button {
     flex-direction: column;
     position: fixed;
 
-    width: 80%;
+    width: 100%;
     height: 100vh;
     top: 0;
-    left: 10%;
+    left: 0;
     box-sizing: border-box;
 
     margin: auto;
@@ -102,8 +102,6 @@ button {
     display: flex;
     justify-content: space-between;
 
-    padding-left: 15px;
-
     width: 100%;
 
     background-color: var(--bg-blue-light-color);
@@ -111,7 +109,7 @@ button {
     text-decoration: none;
 }
 
-.header>a {
+.header__registration>a {
     text-decoration: none;
     color: var(--black-color);
 }
@@ -121,15 +119,15 @@ button {
 }
 
 .header__logo__img {
-    width: 70px;
+    width: 40px;
 }
 
 .header__logo__text {
-    padding-top: 3px;
+    padding-top: 6px;
     padding-left: 10px;
 
     font-family: var(--font-family-header);
-    font-size: var(--font-size-height);
+    font-size: var(--font-size-light);
 }
 
 .header__registration {
@@ -137,7 +135,6 @@ button {
 }
 
 .header__menu__button {
-    padding: 6px 10px 0px 10px;
     margin-right: 15px;
 
     border: none;
@@ -147,16 +144,16 @@ button {
     cursor: pointer;
 }
 
-.header__menu__button:hover {
-    border-radius: 35px;
+.header__menu__button__img {
+    padding: 5px 5px 5px 5px;
 
-    background-color: var(--white-color);
+    width: 40px;
 }
 
-.header__menu__button__img {
-    padding-top: 4px;
+.header__menu__button__img:hover {
+    border-radius: 40px;
 
-    width: 50px;
+    background-color: var(--white-color);
 }
 
 /* Навигация */
@@ -186,8 +183,8 @@ button {
 }
 
 .nav__menu__list>li:hover {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 
     background-color: var(--white-color);
 }
@@ -225,7 +222,7 @@ button {
     flex-direction: row;
 
     width: 100%;
-    height: calc(100% - 79px);
+    height: calc(100% - 55px);
 }
 
 .main__content {
@@ -234,9 +231,9 @@ button {
     height: 100%;
     box-sizing: border-box;
 
-    margin: 10px 10px 0px 0px;
+    margin: 10px 0px 0px 10px;
 
-    border-radius: 15px;
+    border-radius: 10px;
 
     background-color: var(--white-color);
     overflow-y: scroll;
@@ -245,8 +242,8 @@ button {
 .main__content::-webkit-scrollbar {
     width: 15px;
 
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 
     background: var(--white-color);
 }
@@ -254,8 +251,8 @@ button {
 .main__content::-webkit-scrollbar-thumb {
     max-height: 40px;
 
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 
     background-color: gray;
 }
