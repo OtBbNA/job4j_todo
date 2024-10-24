@@ -1,0 +1,1 @@
+ALTER TABLE tasks ADD COLUMN categories_id int REFERENCES categories(id);

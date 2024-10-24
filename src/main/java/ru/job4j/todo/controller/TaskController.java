@@ -1,15 +1,24 @@
 package ru.job4j.todo.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
-import ru.job4j.todo.service.PriorityService;
-import ru.job4j.todo.service.TaskService;
+import ru.job4j.todo.service.category.CategoryService;
+import ru.job4j.todo.service.priority.PriorityService;
+import ru.job4j.todo.service.task.TaskService;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping({"task"})
@@ -18,8 +27,9 @@ public class TaskController {
 
     private final TaskService taskService;
     private final PriorityService priorityService;
+    private final CategoryService categoryService;
 
-    @GetMapping({"/all"})
+    @GetMapping("/all")
     public String getIndexPage(Model model, HttpSession session) {
         var user = (User) session.getAttribute("user");
         var tasks = taskService.findByUser(user);
@@ -57,13 +67,15 @@ public class TaskController {
     @GetMapping("/create")
     public String getCreatePage(Model model) {
         model.addAttribute("priorities", priorityService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
         return "page/create";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute Task task, Model model, HttpSession session) {
+    public String create(@ModelAttribute Task task, Model model, HttpSession session, @RequestParam(required = false) List<Integer> category) {
         var user = (User) session.getAttribute("user");
         task.setUser(user);
+        task.setCategories(new ArrayList<>(categoryService.findAllById(category)));
         taskService.save(task);
         model.addAttribute("user", user);
         return "redirect:/index";
@@ -76,8 +88,9 @@ public class TaskController {
             model.addAttribute("message", "Произошла ошибка при обновлении");
             return "errors/404";
         }
-        model.addAttribute("priorities", priorityService.findAll());
         model.addAttribute("task", task.get());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("priorities", priorityService.findAll());
         return "page/update";
     }
 

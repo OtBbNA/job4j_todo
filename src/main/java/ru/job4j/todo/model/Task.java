@@ -5,12 +5,12 @@ import javax.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Task {
 
@@ -19,18 +19,14 @@ public class Task {
     @EqualsAndHashCode.Include
     private int id;
 
-    @NonNull
     private String title;
 
-    @NonNull
     private String description;
 
-    @NonNull
     private LocalDateTime created = LocalDateTime.now();
 
     private boolean done;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -38,4 +34,12 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "priority_id")
     private Priority priority;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tasks_categories",
+            joinColumns = { @JoinColumn(name = "task_id") },
+            inverseJoinColumns = { @JoinColumn(name = "categories_id") }
+    )
+    private List<Category> categories = new ArrayList<>();
 }

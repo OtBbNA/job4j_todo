@@ -1,8 +1,10 @@
-package ru.job4j.todo.store;
+package ru.job4j.todo.store.priority;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Priority;
+import ru.job4j.todo.store.CrudRepository;
+import ru.job4j.todo.store.priority.PriorityStore;
 
 import java.util.Collection;
 

@@ -29,10 +29,18 @@
                         </p>
                     </div>
                 </div>
+                <div class="main__content__categories">
+                    <ul class="main__content__categories__current" >
+                        <li class="main__content__categories__current__element" th:each="category : ${task.categories}">
+                            <span th:text="${category.name}"></span>
+                        </li>
+                    </ul>
+                </div>
                 <div class="main__content__head__text" th:text="${task.description}">Описание задачи</div>
             </div>
         </section>
     </div>
     <script th:src="@{/js/menuCollapseScript.js}"></script>
+    <script th:src="@{/js/randomColorScript.js}"></script>
 </body>
 </html>

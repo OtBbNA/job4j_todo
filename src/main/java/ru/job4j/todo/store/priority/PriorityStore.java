@@ -1,10 +1,10 @@
-package ru.job4j.todo.service;
+package ru.job4j.todo.store.priority;
 
 import ru.job4j.todo.model.Priority;
 
 import java.util.Collection;
 
-public interface PriorityService {
+public interface PriorityStore {
 
     Collection<Priority> findAll();
 }

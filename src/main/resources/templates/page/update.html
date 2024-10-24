@@ -23,8 +23,9 @@
                 </div>
                 <div class="main__content__priority">
                     <label for="priority">Приоритет:</label>
-                    <select name="priority.id" id="priority" th:field="*{priority.id}">
-                        <option th:each="priority: ${priorities}" th:value="${priority.id}" th:text="${priority.position}" th:selected="${task.priority.id == priority.id}">Приоритет задачи</option>
+                    <select id="priority" name="priority.id" th:field="*{priority.id}">
+                        <option th:each="priority: ${priorities}" th:value="${priority.id}"
+                                th:text="${priority.position}" th:selected="${task.priority.id == priority.id}">Приоритет задачи</option>
                     </select>
                 </div>
                 <div class="main__content__info">
@@ -35,6 +36,16 @@
                     </p>
                 </div>
             </div>
+            <div class="main__content__categories">
+                <select class="main__content__categories__list" id="category" name="categories" multiple>
+                    <option class="main__content__categories__list__element" th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" th:selected="${#lists.contains(task.categories, category)}"></option>
+                </select>
+                <ul class="main__content__categories__current"></ul>
+                <button class="main__content__categories__button" type="button">
+                    <img th:src="@{/img/add-circle.svg}">
+                    <ul class="main__content__categories__button__select"></ul>
+                </button>
+            </div>
             <div class="main__content__text">
                 <textarea type="text" id="description" name="description" th:field="*{description}" placeholder="Введите описание задачи"></textarea>
             </div>
@@ -42,5 +53,6 @@
     </section>
 </form>
 <script th:src="@{/js/menuCollapseScript.js}"></script>
+<script th:src="@{/js/categoryScript.js}"></script>
 </body>
 </html>

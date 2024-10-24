@@ -11,6 +11,10 @@
     border-bottom: 1px solid var(--bg-blue-light-color);
 }
 
+/* Блок с выводом основной информации */
+
+/* Имя задачи */
+
 .main__content__name {
     width: calc(100% - 338px);
     height: 32px;
@@ -36,6 +40,8 @@
     outline: none;
     box-shadow: 0px 1px 5px 0px var(--schadow-gray-color);
 }
+
+/* Приоритет задачи */
 
 .main__content__priority {
     display: flex;
@@ -64,6 +70,8 @@
     box-shadow: 0px 1px 5px 0px var(--schadow-gray-color);
 }
 
+/* Основная информация - автор, дата и прочее */
+
 .main__content__info {
     line-height: 13px;
 }
@@ -71,6 +79,111 @@
 .main__content__info>span, .main__content__info>p>span {
     font-size: var(--font-size-extra-light);
 }
+
+/* Блок с выводом категорий */
+
+.main__content__categories {
+    display: flex;
+    justify-content: flex-start;
+
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 30px;
+    padding-left: 25px;
+}
+
+/* Вывод выбранных или текущих категорий */
+
+.main__content__categories__current {
+    display: flex;
+
+    height: 24px;
+
+    text-decoration: none;
+
+    list-style-type: none;
+}
+
+.main__content__categories__current__element {
+    display: flex;
+
+    margin-right: 10px;
+    padding: 0px 5px 0px 5px;
+
+    height: 24px;
+
+    border-radius: 10px;
+
+    background-color: var(--green-color);
+}
+
+.main__content__categories__current__element>span {
+    display: block;
+
+    font-size: var(--font-size-extra-light);
+}
+
+.main__content__categories__current__button {
+    display: inline-flex;
+    align-items: center;
+
+    margin-left: 5px;
+}
+
+.main__content__categories__current__button>img {
+    width: 17px;
+}
+
+/* Вывод списка доступных категорий */
+
+.main__content__categories__button {
+    display: flex;
+    position: relative;
+
+    height: 24px;
+}
+
+.main__content__categories__button>img {
+    width: 24px;
+}
+
+.main__content__categories__list, .main__content__categories__select {
+/*    display: none;*/
+}
+
+.main__content__categories__button__select {
+    display: block;
+    position: relative;
+    top:0px;
+    left:0px;
+
+    visibility: hidden;
+
+    background-color: var(--white-color);
+
+    padding: 5px 10px 5px 10px;
+
+    border-radius: 10px;
+
+    box-shadow: 0px 1px 5px 0px var(--schadow-gray-color);
+
+    text-decoration: none;
+
+    list-style-type: none;
+}
+
+.main__content__categories__button__select__element {
+    padding: 0px 5px 0px 5px;
+    font-size: var(--font-size-extra-light);
+}
+
+.main__content__categories__button__select__element:hover {
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 0px var(--schadow-gray-color);
+}
+
+/* Блок с выводом текста задачи */
 
 .main__content__text {
     height: calc(100% - 62px);

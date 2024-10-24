@@ -1,6 +1,5 @@
-package ru.job4j.todo.store;
+package ru.job4j.todo.store.task;
 
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -8,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.model.User;
+import ru.job4j.todo.store.CrudRepository;
 
 import java.util.*;
 
@@ -42,7 +42,7 @@ public class SimpleTaskStore implements TaskStore {
                             "fTitle", task.getTitle(),
                             "fDescription", task.getDescription(),
                             "fUserId", task.getUser().getId(),
-                                "fPriority", task.getPriority())
+                            "fPriority", task.getPriority())
             );
             rsl = true;
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class SimpleTaskStore implements TaskStore {
     public Collection<Task> findByUser(User user) {
         List<Task> rsl = new ArrayList<>();
         try {
-            rsl = crudRepository.query("FROM Task AS i JOIN FETCH i.priority WHERE i.user = :fUser", Task.class,
+            rsl = crudRepository.query("SELECT DISTINCT i FROM Task AS i JOIN FETCH i.priority JOIN FETCH i.categories WHERE i.user = :fUser", Task.class,
                     Map.of("fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
@@ -91,7 +91,7 @@ public class SimpleTaskStore implements TaskStore {
     public Collection<Task> findByDoneAndUser(boolean done, User user) {
         List<Task> rsl = new ArrayList<>();
         try {
-            rsl = crudRepository.query("FROM Task AS i JOIN FETCH i.priority WHERE i.done = :fDone AND i.user = :fUser", Task.class,
+            rsl = crudRepository.query("FROM Task AS i JOIN FETCH i.priority JOIN FETCH i.categories WHERE i.done = :fDone AND i.user = :fUser", Task.class,
                     Map.of("fDone", done, "fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());
