@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "tasks")
 @Data
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Task {
 

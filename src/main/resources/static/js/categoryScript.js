@@ -1,4 +1,5 @@
 const buttonPlus = document.querySelector('.main__content__categories__button');
+const buttonPlusImage = document.querySelector('.main__content__categories__button>img');
 const listElements = document.querySelectorAll('.main__content__categories__list__element');
 const buttonSelect = document.querySelector('.main__content__categories__button__select');
 const currentCategory = document.querySelector('.main__content__categories__current');
@@ -19,12 +20,19 @@ listElements.forEach((option) => {
 
 buttonPlus.addEventListener('click', function() {
     buttonSelect.style.visibility = buttonSelect.style.visibility === 'visible' ? 'hidden' : 'visible';
+    if (buttonSelect.style.visibility === 'visible') {
+        buttonPlusImage.style.borderTopRightRadius = '0px';
+        buttonPlusImage.style.borderBottomRightRadius = '0px';
+    } else {
+        buttonPlusImage.style.borderRadius= '12px';
+    }
 });
 
 // Закрытие списка при уходе курсора мыши
 
 buttonSelect.onmouseleave = function() {
     buttonSelect.style.visibility = 'hidden';
+    buttonPlusImage.style.borderRadius= '12px';
 };
 
 // Получаем все элементы списка, созданные динамически
@@ -54,12 +62,13 @@ buttonSelectElements.forEach((categoryElement) => {
         button.addEventListener('click', function() {
             currentCategory.removeChild(li);
             categoryElement.style.display = 'block';
+            associatedOption.selected = false;
         });
 
         button.appendChild(img);
         li.appendChild(span);
         li.appendChild(button);
-        currentCategory.appendChild(li);
+        currentCategory.insertBefore(li, buttonPlus);
 
         categoryElement.style.display = 'none';
     }
@@ -84,20 +93,21 @@ buttonSelectElements.forEach((categoryElement) => {
         const img = document.createElement('img');
         img.src = '/img/close.svg';
 
+        const associatedOption = document.querySelector(`.main__content__categories__list__element[value="${categoryElement.dataset.value}"]`);
+        if (associatedOption) {
+            associatedOption.selected = true;
+        }
+
         button.addEventListener('click', function() {
             currentCategory.removeChild(li);
             categoryElement.style.display = 'block';
+            associatedOption.selected = false;
         });
 
         button.appendChild(img);
         li.appendChild(span);
         li.appendChild(button);
-        currentCategory.appendChild(li);
-
-        const associatedOption = document.querySelector(`.main__content__categories__list__element[value="${categoryElement.dataset.value}"]`);
-        if (associatedOption) {
-            associatedOption.selected = true;
-        }
+        currentCategory.insertBefore(li, buttonPlus);
 
         categoryElement.style.display = 'none';
     });

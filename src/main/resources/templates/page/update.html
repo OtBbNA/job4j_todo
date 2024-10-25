@@ -19,35 +19,45 @@
             <div class="main__content__head">
                 <input type="hidden" id="id" name="id" th:field="*{id}">
                 <div class="main__content__name">
-                    <textarea type="text" id="title" name="title" th:field="*{title}" placeholder="Введите имя задачи" required></textarea>
+                    <textarea type="text" id="title" name="title" th:field="*{title}" placeholder="Введите имя задачи"
+                              required></textarea>
                 </div>
-                <div class="main__content__priority">
-                    <label for="priority">Приоритет:</label>
-                    <select id="priority" name="priority.id" th:field="*{priority.id}">
-                        <option th:each="priority: ${priorities}" th:value="${priority.id}"
-                                th:text="${priority.position}" th:selected="${task.priority.id == priority.id}">Приоритет задачи</option>
-                    </select>
-                </div>
-                <div class="main__content__info">
-                    <span id="user" name="user" th:field="*{user}" th:text="*{user.name}">Автор</span>
-                    <p>
-                        <span id="created" name="created" th:text="*{{created}}">00.00.0000, 00:00</span>
-                        <span class="task__state" id="done" name="done" th:text="*{done ? 'Готово' : 'Новая'}">Новая</span>
-                    </p>
+                <div class="main__content__head__row">
+                    <div class="main__content__priority">
+                        <label for="priority">Приоритет:</label>
+                        <select id="priority" name="priority.id" th:field="*{priority.id}">
+                            <option th:each="priority: ${priorities}" th:value="${priority.id}"
+                                    th:text="${priority.position}" th:selected="${task.priority.id == priority.id}">
+                                Приоритет задачи
+                            </option>
+                        </select>
+                    </div>
+                    <div class="main__content__info">
+                        <span id="user" name="user" th:field="*{user}" th:text="*{user.name}">Автор</span>
+                        <p>
+                            <span id="created" name="created" th:text="*{{created}}">00.00.0000, 00:00</span>
+                            <span class="task__state" id="done" name="done"
+                                  th:text="*{done ? 'Готово' : 'Новая'}">Новая</span>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="main__content__categories">
-                <select class="main__content__categories__list" id="category" name="categories" multiple>
-                    <option class="main__content__categories__list__element" th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}" th:selected="${#lists.contains(task.categories, category)}"></option>
+                <select class="main__content__categories__list" id="category" name="category" multiple required>
+                    <option class="main__content__categories__list__element" th:each="category : ${categories}"
+                            th:value="${category.id}" th:text="${category.name}"
+                            th:selected="${#lists.contains(task.categories, category)}"></option>
                 </select>
-                <ul class="main__content__categories__current"></ul>
-                <button class="main__content__categories__button" type="button">
-                    <img th:src="@{/img/add-circle.svg}">
-                    <ul class="main__content__categories__button__select"></ul>
-                </button>
+                <ul class="main__content__categories__current">
+                    <button class="main__content__categories__button" type="button">
+                        <img th:src="@{/img/add-circle.svg}">
+                        <ul class="main__content__categories__button__select"></ul>
+                    </button>
+                </ul>
             </div>
             <div class="main__content__text">
-                <textarea type="text" id="description" name="description" th:field="*{description}" placeholder="Введите описание задачи"></textarea>
+                <textarea type="text" id="description" name="description" th:field="*{description}"
+                          placeholder="Введите описание задачи"></textarea>
             </div>
         </div>
     </section>

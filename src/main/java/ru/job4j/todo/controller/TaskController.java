@@ -75,7 +75,12 @@ public class TaskController {
     public String create(@ModelAttribute Task task, Model model, HttpSession session, @RequestParam(required = false) List<Integer> category) {
         var user = (User) session.getAttribute("user");
         task.setUser(user);
-        task.setCategories(new ArrayList<>(categoryService.findAllById(category)));
+        List<Category> categories = new ArrayList<>(categoryService.findAllById(category));
+        if (categories.size() <= 0) {
+            model.addAttribute("message", "Выберете минимум одну категорию");
+            return "errors/404";
+        }
+        task.setCategories(categories);
         taskService.save(task);
         model.addAttribute("user", user);
         return "redirect:/index";
@@ -95,8 +100,14 @@ public class TaskController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Task task, Model model, HttpSession session) {
+    public String update(@ModelAttribute Task task, @RequestParam(required = false) List<Integer> category, Model model, HttpSession session) {
         task.setUser((User) session.getAttribute("user"));
+        List<Category> categories = new ArrayList<>(categoryService.findAllById(category));
+        if (categories.size() <= 0) {
+            model.addAttribute("message", "Выберете минимум одну категорию");
+            return "errors/404";
+        }
+        task.setCategories(categories);
         if (!taskService.update(task)) {
             model.addAttribute("message", "Произошла ошибка при обновлении");
             return "errors/404";

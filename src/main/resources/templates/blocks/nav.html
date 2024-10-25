@@ -10,7 +10,7 @@
     </ul>
     <ul class="nav__menu__list">
         <li>
-            <a th:href="@{/}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/') ? ' active' : ''}">
+            <a th:href="@{/}" th:classappend="${#strings.equals(#httpServletRequest.requestURI, '/task/all') ? ' active' : ''}">
                 <img th:src="@{/img/all.svg}" alt="#">
                 <p class="nav__menu__list__name">Все</p>
             </a>

@@ -36,14 +36,7 @@ public class SimpleTaskStore implements TaskStore {
     public boolean update(Task task) {
         boolean rsl = false;
         try {
-            crudRepository.run(
-                    "UPDATE Task SET title = :fTitle, description = :fDescription, user_id = :fUserId, priority = :fPriority WHERE id = :fId",
-                    Map.of("fId", task.getId(),
-                            "fTitle", task.getTitle(),
-                            "fDescription", task.getDescription(),
-                            "fUserId", task.getUser().getId(),
-                            "fPriority", task.getPriority())
-            );
+            crudRepository.run(session -> session.merge(task));
             rsl = true;
         } catch (Exception e) {
             LOG.error("Ошибка при обновлении задачи: " + e.getMessage());
@@ -91,7 +84,7 @@ public class SimpleTaskStore implements TaskStore {
     public Collection<Task> findByDoneAndUser(boolean done, User user) {
         List<Task> rsl = new ArrayList<>();
         try {
-            rsl = crudRepository.query("FROM Task AS i JOIN FETCH i.priority JOIN FETCH i.categories WHERE i.done = :fDone AND i.user = :fUser", Task.class,
+            rsl = crudRepository.query("SELECT DISTINCT i FROM Task AS i JOIN FETCH i.priority JOIN FETCH i.categories WHERE i.done = :fDone AND i.user = :fUser", Task.class,
                     Map.of("fDone", done, "fUser", user));
         } catch (Exception e) {
             LOG.error("Произошла ошибка во время поиска: " + e.getMessage());

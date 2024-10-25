@@ -137,6 +137,8 @@ button {
 .header__menu__button {
     margin-right: 15px;
 
+    height: 40px;
+
     border: none;
 
     background-color: transparent;
@@ -209,8 +211,8 @@ button {
 }
 
 .active {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 
     background-color: var(--white-color);
 }
@@ -222,10 +224,12 @@ button {
     flex-direction: row;
 
     width: 100%;
-    height: calc(100% - 55px);
+    height: calc(100% - 49px);
 }
 
 .main__content {
+    display: flex;
+    flex-direction: column;
     flex: 1;
 
     height: 100%;
@@ -282,7 +286,7 @@ button {
     /* Хедер */
 
     .header__logo__img {
-        width: 35px;
+        width: 40px;
     }
 
     .header__logo__text {

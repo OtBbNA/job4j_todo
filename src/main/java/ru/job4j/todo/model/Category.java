@@ -2,6 +2,7 @@ package ru.job4j.todo.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 @Data
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category {
 

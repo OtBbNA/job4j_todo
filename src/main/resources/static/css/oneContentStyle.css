@@ -3,7 +3,6 @@
     justify-content: space-between;
 
     margin-left: 10px;
-    margin-top: 10px;
     margin-bottom: 10px;
     padding-right: 30px;
     padding-left: 25px;
@@ -11,8 +10,13 @@
     border-bottom: 1px solid var(--bg-blue-light-color);
 }
 
+/* Имя задачи */
+
 .main__content__head__name {
-    width: calc(100% - 338px);
+    flex: 1;
+
+    margin-top: 10px;
+
     height: 32px;
 }
 
@@ -20,12 +24,31 @@
     margin-left: 5px;
 }
 
+.main__content__head__row {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+}
+
+/* Приоритет задачи */
+
+.main__content__head__priority {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 .main__content__head__priority>span {
     margin-left: 14px;
     margin-right: 17.58px;
 }
 
+/* Основная информация - автор, дата и прочее */
+
 .main__content__head__info {
+    margin-top: 10px;
+    margin-left: 10px;
+
     line-height: 13px;
 }
 
@@ -33,21 +56,22 @@
     font-size: var(--font-size-extra-light);
 }
 
+/* Блок с выводом категорий */
+
 .main__content__categories {
     display: flex;
     justify-content: flex-start;
 
     margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
     padding-right: 30px;
     padding-left: 25px;
 }
 
 .main__content__categories__current {
     display: flex;
+    flex-wrap: wrap;
 
-    height: 24px;
+    height: auto;
 
     text-decoration: none;
 
@@ -58,7 +82,8 @@
     display: flex;
 
     margin-right: 10px;
-    padding: 0px 15px 0px 15px;
+    margin-bottom: 10px;
+    padding: 0px 16px 0px 16px;
 
     height: 24px;
 
@@ -81,4 +106,35 @@
     font-weight: 300;
     line-height: 35px;
     text-align: justify;
+}
+
+@media (max-width: 900px) {
+
+    .main__content__head {
+        flex-wrap: wrap;
+
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .main__content__head__name {
+        flex-basis: 100%;
+    }
+
+    .main__content__head__name>span {
+        margin-left: 5px;
+    }
+
+    .main__content__head__row {
+        width: 100%;
+    }
+
+    .main__content__categories {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .main__content__text {
+        height: calc(100% - 95px);
+    }
 }
