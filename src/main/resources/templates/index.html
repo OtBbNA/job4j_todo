@@ -20,7 +20,7 @@
                     <tr th:each="task: ${tasks}" th:onclick="|window.location.href='@{/task/one/{taskId}(taskId=${task.id})}'|">
                         <td th:text="${task.id}">Индекс</td>
                         <td th:text="${task.title}">Название таски</td>
-                        <td th:text="${{task.created}}">Дата таски</td>
+                        <td th:text="${#temporals.format(task.created, 'HH:mm dd-MM-yyyy')}">Дата таски</td>
                         <td th:text="${task.priority.position}">Приоритет задачи</td>
                         <td class="task__state" th:text="${task.done ? 'Готово' : 'Новая'}">Состояние таски</td>
                     </tr>
