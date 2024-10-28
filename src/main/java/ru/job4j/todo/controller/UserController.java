@@ -11,6 +11,8 @@ import ru.job4j.todo.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
@@ -23,8 +25,28 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String getRegistrationPage() {
+    public String getRegistrationPage(Model model) {
+        for (String timeId : TimeZone.getAvailableIDs()) {
+            if (timeId.contains("Etc/GMT-") || timeId.contains("Etc/GMT+")) {
+                System.out.println(TimeZone.getTimeZone(timeId));
+            }
+        }
+        var timeZoneList = Arrays.stream(TimeZone.getAvailableIDs())
+                .filter(t -> t.contains("Etc/GMT-") || t.contains("Etc/GMT+"))
+                .map(TimeZone::getTimeZone)
+                .collect(Collectors.toList());
+        timeZoneList.sort((t1, t2) -> {
+            int time1 = getTime(t1.getID());
+            int time2 = getTime(t2.getID());
+            return Integer.compare(time1, time2);
+        });
+        model.addAttribute("timeZoneList", timeZoneList);
         return "users/register";
+    }
+
+    private static int getTime(String id) {
+        String rsl = id.replace("Etc/GMT", "");
+        return Integer.parseInt(rsl);
     }
 
     @PostMapping("/register")

@@ -26,6 +26,12 @@
             <input type="email" class="form-control" id="login" name="login" placeholder="ivan@mail.ru" required>
             <p>Введите пароль</p>
             <input type="password" class="form-control" id="password" name="password" maxlength="16" required>
+            <p>Выберете часовой пояс</p>
+            <select type="password" class="form-control" id="timezone" name="timezone" required>
+                <option th:each="timeZone: ${timeZoneList}" th:value="${timeZone.getID}"
+                        th:text="${timeZone.getDisplayName}">
+                </option>
+            </select>
             <button class="main__content__button" type="submit">Зарегистрироваться</button>
             <a th:href="@{/users/login}">Отмена</a>
         </form>

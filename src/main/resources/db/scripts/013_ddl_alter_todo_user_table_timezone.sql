@@ -1,0 +1,1 @@
+ALTER TABLE todo_user ADD COLUMN timezone varchar(225) not null;

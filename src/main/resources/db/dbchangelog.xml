@@ -18,4 +18,6 @@
     <include file="scripts/009_dml_insert_categories.sql" relativeToChangelogFile="true"/>
     <include file="scripts/010_ddl_create_task_categories_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/011_ddl_alter_tasks_table_categories_id.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/012_ddl_alter_tasks_column_created.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/013_ddl_alter_todo_user_table_timezone.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
